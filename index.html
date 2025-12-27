@@ -1,0 +1,165 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAHEEM-XMD-3 Deploy Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-robot"></i> RAHEEM-XMD-3 DEPLOY PANEL</h1>
+            <p class="subtitle">Deploy your WhatsApp bot with session upload & env configuration</p>
+        </header>
+
+        <div class="panel">
+            <div class="section">
+                <h2><i class="fas fa-upload"></i> Step 1: Upload Session File</h2>
+                <p>Upload your <code>creds.json</code> or session file here:</p>
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop your session file here or click to browse</p>
+                    <input type="file" id="fileInput" accept=".json,.txt">
+                    <p class="note">Supported: .json, .txt (Max 5MB)</p>
+                </div>
+                <div id="fileInfo"></div>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-cog"></i> Step 2: Environment Variables</h2>
+                <p>Fill the required env variables for your bot:</p>
+                <div class="env-form">
+                    <div class="input-group">
+                        <label for="sessionId">SESSION_ID <span class="required">*</span></label>
+                        <input type="text" id="sessionId" placeholder="RAHEEM-XMD-2>>>XXXXXXXX">
+                        <small>Your WhatsApp session ID from pairing</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="prefix">PREFIX</label>
+                        <input type="text" id="prefix" placeholder="." value=".">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="mode">MODE</label>
+                        <select id="mode">
+                            <option value="public">public</option>
+                            <option value="private">private</option>
+                            <option value="inbox">inbox</option>
+                            <option value="group">group</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="ownerNumber">OWNER_NUMBER</label>
+                        <input type="text" id="ownerNumber" placeholder="255763111390" value="255763111390">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="botName">BOT_NAME</label>
+                        <input type="text" id="botName" placeholder="RAHEEM-XMD-3" value="RAHEEM-XMD-3">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="stickerName">STICKER_NAME</label>
+                        <input type="text" id="stickerName" placeholder="RAHEEM-XMD-3" value="RAHEEM-XMD-3">
+                    </div>
+
+                    <div class="input-group checkbox">
+                        <label>
+                            <input type="checkbox" id="alwaysOnline" checked> ALWAYS_ONLINE
+                        </label>
+                    </div>
+
+                    <div class="input-group checkbox">
+                        <label>
+                            <input type="checkbox" id="welcome" checked> WELCOME (group welcome messages)
+                        </label>
+                    </div>
+
+                    <div class="input-group checkbox">
+                        <label>
+                            <input type="checkbox" id="antiLink" checked> ANTI_LINK (remove links in groups)
+                        </label>
+                    </div>
+
+                    <h3>Advanced Settings <i class="fas fa-chevron-down" id="toggleAdvanced"></i></h3>
+                    <div class="advanced" id="advancedSection">
+                        <div class="input-group">
+                            <label for="menuImage">MENU_IMAGE_URL</label>
+                            <input type="text" id="menuImage" value="https://files.catbox.moe/9gl0l8.jpg">
+                        </div>
+                        <div class="input-group">
+                            <label for="description">DESCRIPTION</label>
+                            <input type="text" id="description" value="> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ RAHEEM-XMD-3*">
+                        </div>
+                        <div class="input-group">
+                            <label for="aliveImg">ALIVE_IMG</label>
+                            <input type="text" id="aliveImg" value="https://files.catbox.moe/a97zm1.jpg">
+                        </div>
+                        <div class="input-group">
+                            <label for="liveMsg">LIVE_MSG</label>
+                            <input type="text" id="liveMsg" value="> *RAHEEM-XM-3 always online❄️">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-rocket"></i> Step 3: Deploy</h2>
+                <p>Choose your deployment platform:</p>
+                <div class="platforms">
+                    <button class="platform-btn" data-platform="github">
+                        <i class="fab fa-github"></i> GitHub / Manual
+                    </button>
+                    <button class="platform-btn" data-platform="render">
+                        <i class="fas fa-server"></i> Render
+                    </button>
+                    <button class="platform-btn" data-platform="heroku">
+                        <i class="fab fa-heroku"></i> Heroku
+                    </button>
+                    <button class="platform-btn" data-platform="koyeb">
+                        <i class="fas fa-cloud"></i> Koyeb
+                    </button>
+                </div>
+
+                <div class="deploy-section">
+                    <button id="generateBtn" class="generate-btn">
+                        <i class="fas fa-file-archive"></i> Generate Deployment Package
+                    </button>
+                    <div id="output"></div>
+                    <div id="downloadSection" class="hidden">
+                        <a id="downloadLink" class="download-btn" download="RAHEEM-XMD-3-Deploy.zip">
+                            <i class="fas fa-download"></i> Download ZIP Package
+                        </a>
+                        <p class="instructions">
+                            <strong>Instructions:</strong> Extract the ZIP, then deploy to your chosen platform.
+                        </p>
+                        <div class="deploy-instructions">
+                            <h4><i class="fas fa-info-circle"></i> Quick Deploy Guides:</h4>
+                            <ul>
+                                <li><strong>Render:</strong> Upload ZIP, extract, connect repo, deploy.</li>
+                                <li><strong>Heroku:</strong> Use Heroku CLI or connect GitHub repo.</li>
+                                <li><strong>Koyeb:</strong> Deploy via Git repository or Docker.</li>
+                                <li><strong>Manual:</strong> Run <code>npm install</code> then <code>npm start</code>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>RAHEEM-XMD-3 Bot | Created by <strong>RAHEEM-CM</strong> | 🇹🇿 Tanzania</p>
+            <p class="links">
+                <a href="https://github.com/Raheem-cm"><i class="fab fa-github"></i> GitHub</a> |
+                <a href="https://whatsapp.com/channel/0029VbAffhD2ZjChG9DX922r"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+                          </html>
